@@ -3,7 +3,7 @@ using Tic_Tac_Toe.Classes;
 
 namespace Tic_Tac_Toe
 {
-    class Program
+    public class Program
     {
 
         public static Player player1;
@@ -48,6 +48,10 @@ namespace Tic_Tac_Toe
         }
 
 
+        /// <summary>
+        /// PlayGame - Runs logic for a game of Tic-Tac-Toe. Calls to switch players, Get user position selections, Place Board markers,
+        ///     Check for a winning condition, and checks for a draw condition.
+        /// </summary>
         public static void PlayGame()
         {
             Console.Clear();
@@ -56,15 +60,17 @@ namespace Tic_Tac_Toe
             while (gameFlag && avail.posCounter >= 0)
             {
                 board.DisplayBoard();
-                Player current = (player1.IsTurn) ? player1 : player2;
-
+                Player CurrentPlayer = GetPlayer();
 
                 try
                 {
-                    Console.Write($"{current.Name}'s move: ");
-                    uint choice = avail.ChoosePosition();
-                    current.moves.Append(choice.ToString());
-                    board.PlaceMarker(choice, current.Marker);
+                    Console.Write($"{CurrentPlayer.Name}'s move: ");
+
+                    uint choice = avail.ChoosePosition(); //Retrieve User's selection
+
+                    CurrentPlayer.moves.Append(choice.ToString()); //Record User's selection
+
+                    board.PlaceMarker(choice, CurrentPlayer.Marker); //Place Marker on Board
                 }
                 catch (Exception)
                 {
@@ -72,16 +78,16 @@ namespace Tic_Tac_Toe
                 }
 
 
-                if (current.CheckForWin())
+                if (CurrentPlayer.CheckForWin()) //Entered if Player has won
                 {
                     Console.Clear();
-                    Console.WriteLine($"{current.Name} wins!");
+                    Console.WriteLine($"{CurrentPlayer.Name} wins!");
                     Console.WriteLine("Press ENTER to continue.");
                     Console.ReadLine();
                     Console.Clear();
                     gameFlag = false;
                 }
-                else if(avail.posCounter == 0)
+                else if(avail.posCounter == 0) //Entered if all positions are taken
                 {
                     Console.Clear();
                     Console.WriteLine("Draw Game!");
@@ -90,14 +96,38 @@ namespace Tic_Tac_Toe
                     Console.Clear();
                     gameFlag = false;
                 }
-                else
+                else //Entered if Player has not won and positions are still available
                 {
-                    player1.IsTurn = (player1.IsTurn) ? false : true;
+                    SwitchPlayer();
                     Console.Clear();
                 }
             }
         }
 
+
+        /// <summary>
+        /// GetPlayer - Retrieves referance to current player whos isTurn value is true
+        /// </summary>
+        /// <returns> Player - Player whos turn it currently is </returns>
+        public static Player GetPlayer()
+        {
+            Player current = (player1.IsTurn) ? player1 : player2; //Retrieve current player
+            return current;
+        }
+
+
+        /// <summary>
+        /// SwitchPlayer - Changes boolean value of Player's IsTurn property
+        /// </summary>
+        public static void SwitchPlayer()
+        {
+            player1.IsTurn = (player1.IsTurn) ? false : true; //Swap Bool Values
+        }
+
+
+        /// <summary>
+        /// GetUserNames - Rerieves strings representing user's names
+        /// </summary>
         public static void GetUserNames()
         {
             Console.Clear();
@@ -107,6 +137,11 @@ namespace Tic_Tac_Toe
             player2.Name = Console.ReadLine();
         }
 
+
+        /// <summary>
+        /// GetMenuOption - Retrives integer value representing menu option choice
+        /// </summary>
+        /// <returns></returns>
         public static int GetMenuOption()
         {
             try
@@ -127,6 +162,10 @@ namespace Tic_Tac_Toe
             }
         }
 
+
+        /// <summary>
+        /// Menu - Displays main menu options to user
+        /// </summary>
         public static void Menu()
         {
             Console.WriteLine("1. Start New Game");

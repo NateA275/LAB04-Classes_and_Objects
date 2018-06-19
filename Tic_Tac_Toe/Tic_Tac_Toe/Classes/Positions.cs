@@ -7,8 +7,17 @@ namespace Tic_Tac_Toe.Classes
     public class Positions
     {
         public StringBuilder positions = new StringBuilder();
-        public int posCounter = 9;
+        public int posCounter { get; set; }
 
+        public Positions()
+        {
+            posCounter = 9;
+        }
+
+        /// <summary>
+        /// ChoosePosition - Retreives and validates a user's choice of position.
+        /// </summary>
+        /// <returns> int choice - player's input choice of position </returns>
         public uint ChoosePosition()
         {
             try
