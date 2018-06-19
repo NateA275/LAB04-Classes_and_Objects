@@ -62,5 +62,23 @@ namespace Test_Tic_Tac_Toe
             //Assert
             Assert.Equal(marker, myBoard.board[position - 1]);
         }
+
+        [Theory]
+        [InlineData('A')]
+        [InlineData('=')]
+        [InlineData('?')]
+        [InlineData('@')]
+        [InlineData('Z')]
+        public void CanSetPlayerMarker(char marker)
+        {
+            //Arrange
+            Player newPlayer = new Player(marker, false);
+
+            //Act
+            char charSprite = newPlayer.Marker;
+
+            //Assert
+            Assert.Equal(charSprite, marker);
+        }
     }
 }
