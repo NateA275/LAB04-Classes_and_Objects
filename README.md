@@ -5,6 +5,9 @@
 This Program is an exercise in utilizing Classes in C#.
 It implements several classes in order to emulate a Tic Tac Toe game.
 
+Outsmart a friend by trying to get three of your makers in a row before they do.
+You can win by aligning horizonally, vertically, or diagonally!
+
 
 ## Visual
 
@@ -12,6 +15,14 @@ It implements several classes in order to emulate a Tic Tac Toe game.
 
 ## Getting Started
 
-To use this application, first clone the repository to local files using the git clone command.
-Once you have the local files on your machine, open the .sln file in Visual Studio.
-Run the program and interact with the console to play.
+To try out this program:
+
+-Clone this repository to your local files. 
+
+-In Visual Studio, file > open > project/solution Navigate to where you cloned into local files.
+
+-Open "Tic_Tac_Toe.sln" 
+
+-Run the program by going to Debug > Start without debugging in the top menu
+
+-Interact with the program through console window

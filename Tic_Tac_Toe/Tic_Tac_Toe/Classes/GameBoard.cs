@@ -4,15 +4,19 @@ using System.Text;
 
 namespace Tic_Tac_Toe.Classes
 {
-    class GameBoard
+    public class GameBoard
     {
         public char[] board = new char[] { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
 
         public void PlaceMarker(uint position, char marker)
         {
-            board[position - 1] = marker;
+            board[--position] = marker;
         }
 
+
+        /// <summary>
+        /// DisplayBoard - Displays the game board in it's current state. 3x3 grid.
+        /// </summary>
         public void DisplayBoard()
         {
             Console.WriteLine();

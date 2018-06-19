@@ -4,12 +4,12 @@ using System.Text;
 
 namespace Tic_Tac_Toe.Classes
 {
-    class Player
+    public class Player
     {
         public string Name { get; set; }
         public char Marker { get; set; }
         public bool IsTurn { get; set; }
-        public StringBuilder moves = new StringBuilder();
+        public StringBuilder moves = new StringBuilder(); //Consolidation of postions that player is occupying
 
         public Player(char marker, bool isTurn)
         {
@@ -17,10 +17,14 @@ namespace Tic_Tac_Toe.Classes
             IsTurn = isTurn;
         }
 
+
+        /// <summary>
+        /// CheckForWin - Determine if this instance of Player has a collection of moves to have won the game
+        /// </summary>
+        /// <returns> bool - True if player has won game, false if player is not the winner yet </returns>
         public bool CheckForWin()
         {
             string s = moves.ToString();
-
             string[,] sols = new string[,]
             {
                 {"1", "2", "3" },
@@ -32,14 +36,11 @@ namespace Tic_Tac_Toe.Classes
                 {"1", "5", "9" },
                 {"3", "5", "7" },
             };
-
-
             for (int i = 0; i < sols.GetLength(0); i++)
             {
                 if (s.Contains(sols[i, 0]) && s.Contains(sols[i, 1]) && s.Contains(sols[i, 2]))
                     return true;
             }
-
             return false;
         }
     }
